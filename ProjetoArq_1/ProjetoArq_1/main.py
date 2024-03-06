@@ -2,38 +2,7 @@ import sys
 import os
 from MemoriaCache import MemoriaCache
 from buscarEDecodificarInstrucao import BuscarEDecodificarInstrucao
-from lerOperadoresExecutarInstrucao import lerOperadoresExecutarInstrucao
-
-CPU_DEBUG = True
-
-registrador_cp = 0x01
-registrador_ax = 0x02
-registrador_bx = 0x03
-registrador_cx = 0x04
-registrador_dx = 0x05
-
-flag_zero = False
-
-#memoria = MemoriaCache('arquivos_memoria/mov_mov_add.bin')
-#memoria = MemoriaCache('arquivos_memoria/inc_dec.bin')
-#memoria = MemoriaCache('arquivos_memoria/todas_instrucoes.bin')
-#memoria = MemoriaCache('arquivos_memoria/programa_simples.bin')
-#memoria = MemoriaCache('arquivos_memoria/fibonacci_10.bin')
-
-def dumpRegistradores():
-    if CPU_DEBUG:
-        print(f'CP[{registrador_cp:02X}] \
-            AX[{registrador_ax:02X}]  \
-            BX[{registrador_bx:02X}]  \
-            CX[{registrador_cx:02X}]  \
-            DX[{registrador_dx:02X}]  \
-            ZF[{flag_zero}] ')
-
-
-
-
-
-
+from lerOperadoresExecutarInstrucao import LerOperadoresExecutarInstrucao
 
 
 
@@ -75,24 +44,13 @@ if __name__ == '__main__':
                 print('Escolha uma opção valida')
         os.system('cls')    
 
-
-
-
-
-
-
         #Unidade de Controle
         decoder = BuscarEDecodificarInstrucao()
         valores_instrucoes = decoder.buscarEDecodificarInstrucao(arquivo)
 
-        #ULA
-        ler_operadores = lerOperadoresExecutarInstrucao()  # Instantiate the class
-        ler_operadores.lerOperadoresExecutarInstrucao(valores_instrucoes)  # Call the method on the instance
-
-        # dumpRegistradores() 
-
-        #Unidade de Controle
-        # calcularProximaInstrucao(idInstrucao)
+        #ULA e Unidade de Controle
+        ler_operadores = LerOperadoresExecutarInstrucao()
+        ler_operadores.lerOperadoresExecutarInstrucao(valores_instrucoes)
 
         #apenas para nao ficar em loop voce pode comentar a linha abaixo =)
         sys.stdin.read(1)
